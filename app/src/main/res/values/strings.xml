@@ -4,4 +4,8 @@
     <string name="library_welcome_message">Bienvenido a la biblioteca Ualá</string>
     <string name="library_service_error">Ocurrió un error al obtener los datos del servidor</string>
 
+    <string name="book_popularity_placeholder">Popularidad: %d</string>
+    <string name="book_availability_available">Disponible</string>
+    <string name="book_availability_unavailable">No Disponible</string>
+
 </resources>

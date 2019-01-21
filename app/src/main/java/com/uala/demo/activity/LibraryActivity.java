@@ -12,6 +12,8 @@ import com.uala.demo.adapter.BookAdapter;
 import com.uala.demo.model.Book;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +39,7 @@ public class LibraryActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new BookAdapter(books);
+        adapter = new BookAdapter(this, books);
         recyclerView.setAdapter(adapter);
     }
 
@@ -53,8 +55,7 @@ public class LibraryActivity extends AppCompatActivity {
                     return;
                 }
 
-                books.addAll(obtainedBooks);
-                adapter.notifyDataSetChanged();
+                loadBooksIntoRecyclerView(obtainedBooks);
 
             }
 
@@ -64,6 +65,18 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void loadBooksIntoRecyclerView(ArrayList<Book> obtainedBooks) {
+        Collections.sort(obtainedBooks, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o2.getPopularity() - o1.getPopularity();
+            }
+        });
+
+        books.addAll(obtainedBooks);
+        adapter.notifyDataSetChanged();
     }
 
 }

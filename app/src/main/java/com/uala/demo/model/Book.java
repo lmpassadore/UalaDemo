@@ -8,7 +8,7 @@ public class Book {
     private int id;
 
     @SerializedName("nombre")
-    private String name;
+    private String title;
 
     @SerializedName("autor")
     private String author;
@@ -26,15 +26,15 @@ public class Book {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public boolean isAvailability() {
+    public boolean isAvailable() {
         return availability;
     }
 
