@@ -2,5 +2,6 @@
     <string name="app_name">UaláDemo</string>
 
     <string name="library_welcome_message">Bienvenido a la biblioteca Ualá</string>
+    <string name="library_service_error">Ocurrió un error al obtener los datos del servidor</string>
 
 </resources>
