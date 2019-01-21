@@ -1,6 +1,6 @@
-package com.uala.demo.endpoint;
+package com.uala.librarydemo.endpoint;
 
-import com.uala.demo.model.Book;
+import com.uala.librarydemo.model.Book;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,9 @@
-package com.uala.demo;
+package com.uala.librarydemo;
 
 import android.app.Application;
 
-import com.uala.demo.endpoint.AmazonAWSClient;
-import com.uala.demo.util.Constants;
+import com.uala.librarydemo.endpoint.AmazonAWSClient;
+import com.uala.librarydemo.util.Constants;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

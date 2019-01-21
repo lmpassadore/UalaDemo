@@ -1,4 +1,4 @@
-package com.uala.demo.util;
+package com.uala.librarydemo.util;
 
 public class Constants {
 

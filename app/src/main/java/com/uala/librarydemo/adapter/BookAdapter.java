@@ -1,4 +1,4 @@
-package com.uala.demo.adapter;
+package com.uala.librarydemo.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.uala.demo.R;
-import com.uala.demo.model.Book;
+import com.uala.librarydemo.R;
+import com.uala.librarydemo.model.Book;
 
 import java.util.ArrayList;
 

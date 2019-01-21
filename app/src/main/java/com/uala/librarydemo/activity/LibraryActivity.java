@@ -1,4 +1,4 @@
-package com.uala.demo.activity;
+package com.uala.librarydemo.activity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -13,10 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.uala.demo.App;
-import com.uala.demo.R;
-import com.uala.demo.adapter.BookAdapter;
-import com.uala.demo.model.Book;
+import com.uala.librarydemo.App;
+import com.uala.librarydemo.R;
+import com.uala.librarydemo.adapter.BookAdapter;
+import com.uala.librarydemo.model.Book;
 
 import java.util.ArrayList;
 import java.util.Collections;

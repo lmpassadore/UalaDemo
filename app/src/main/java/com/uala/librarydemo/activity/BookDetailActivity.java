@@ -1,4 +1,4 @@
-package com.uala.demo.activity;
+package com.uala.librarydemo.activity;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.uala.demo.R;
-import com.uala.demo.model.Book;
+import com.uala.librarydemo.R;
+import com.uala.librarydemo.model.Book;
 
 public class BookDetailActivity extends AppCompatActivity {
 

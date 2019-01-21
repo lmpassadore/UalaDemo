@@ -1,4 +1,4 @@
-package com.uala.demo.model;
+package com.uala.librarydemo.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
