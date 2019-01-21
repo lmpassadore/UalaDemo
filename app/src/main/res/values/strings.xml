@@ -8,4 +8,11 @@
     <string name="book_availability_available">Disponible</string>
     <string name="book_availability_unavailable">No Disponible</string>
 
+    <string name="bookdetail_title">Detalle</string>
+    <string name="bookdetail_title_label">Título</string>
+    <string name="bookdetail_author_label">Autor</string>
+    <string name="bookdetail_popularity_label">Popularidad</string>
+    <string name="bookdetail_availability_label">Disponibilidad</string>
+
+
 </resources>

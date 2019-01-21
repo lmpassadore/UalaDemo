@@ -21,6 +21,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private Context context;
     private ArrayList<Book> books;
 
+    private OnBookClickListener clickListener;
+
+    public interface OnBookClickListener {
+        void onBookClick(View itemView, int position);
+    }
+
+    public void setClickListener(OnBookClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     class BookViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageViewCover;
@@ -34,6 +44,18 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             textViewAuthor = itemView.findViewById(R.id.book_textview_author);
             textViewPopularity = itemView.findViewById(R.id.book_textview_popularity);
             textViewAvailability = itemView.findViewById(R.id.book_textview_availability);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (clickListener == null)
+                        return;
+
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION)
+                        clickListener.onBookClick(itemView, position);
+                }
+            });
 
         }
 

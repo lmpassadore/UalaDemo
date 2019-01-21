@@ -1,9 +1,13 @@
 package com.uala.demo.activity;
 
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 
 import com.uala.demo.App;
@@ -29,8 +33,21 @@ public class LibraryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
+        setUpActionBar();
+
         setUpRecyclerView();
         requestBooks();
+    }
+
+    private void setUpActionBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getString(R.string.library_welcome_message));
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
     }
 
     private void setUpRecyclerView() {
@@ -40,6 +57,15 @@ public class LibraryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         adapter = new BookAdapter(this, books);
+        adapter.setClickListener(new BookAdapter.OnBookClickListener() {
+            @Override
+            public void onBookClick(View itemView, int position) {
+                Intent intent = new Intent(LibraryActivity.this, BookDetailActivity.class);
+                intent.putExtra(BookDetailActivity.EXTRA_BOOK, books.get(position));
+                startActivity(intent);
+            }
+        });
+
         recyclerView.setAdapter(adapter);
     }
 
@@ -71,7 +97,7 @@ public class LibraryActivity extends AppCompatActivity {
         Collections.sort(obtainedBooks, new Comparator<Book>() {
             @Override
             public int compare(Book o1, Book o2) {
-                return o2.getPopularity() - o1.getPopularity();
+                return Integer.compare(o2.getPopularity(), o1.getPopularity());
             }
         });
 
