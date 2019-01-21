@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,6 +30,8 @@ public class LibraryActivity extends AppCompatActivity {
 
     private BookAdapter adapter;
     private ArrayList<Book> books = new ArrayList<>();
+
+    private boolean ascendingOrder; //Falso por default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +99,46 @@ public class LibraryActivity extends AppCompatActivity {
     }
 
     private void loadBooksIntoRecyclerView(ArrayList<Book> obtainedBooks) {
-        Collections.sort(obtainedBooks, new Comparator<Book>() {
+        books.addAll(obtainedBooks);
+        orderBooksByPopularity(ascendingOrder);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void orderBooksByPopularity(final boolean ascendingOrder) {
+        Collections.sort(books, new Comparator<Book>() {
             @Override
             public int compare(Book o1, Book o2) {
-                return Integer.compare(o2.getPopularity(), o1.getPopularity());
+                return ascendingOrder ? Integer.compare(o2.getPopularity(), o1.getPopularity()) : Integer.compare(o1.getPopularity(), o2.getPopularity());
             }
         });
+    }
 
-        books.addAll(obtainedBooks);
+    private void reverseBookOrder() {
+        ascendingOrder = !ascendingOrder;
+        orderBooksByPopularity(ascendingOrder);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_library, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_reverseorder:
+                reverseBookOrder();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
     }
 
 }
