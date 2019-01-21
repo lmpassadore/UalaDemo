@@ -4,6 +4,9 @@
     <string name="library_welcome_message">Bienvenido a la biblioteca Ualá</string>
     <string name="library_service_error">Ocurrió un error al obtener los datos del servidor</string>
     <string name="library_action_reverseorder">Invertir orden</string>
+    <string name="library_action_showavailablebooks">Ver disponibles</string>
+    <string name="library_action_showunavailablebooks">Ver no disponibles</string>
+    <string name="library_action_showall">Ver todos</string>
 
     <string name="book_popularity_placeholder">Popularidad: %d</string>
     <string name="book_availability_available">Disponible</string>

@@ -7,4 +7,19 @@
         android:title="@string/library_action_reverseorder"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_show_available"
+        android:title="@string/library_action_showavailablebooks"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_nonavailable"
+        android:title="@string/library_action_showunavailablebooks"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_all"
+        android:title="@string/library_action_showall"
+        app:showAsAction="never" />
+
 </menu>

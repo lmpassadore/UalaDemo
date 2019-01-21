@@ -29,9 +29,10 @@ import retrofit2.Response;
 public class LibraryActivity extends AppCompatActivity {
 
     private BookAdapter adapter;
-    private ArrayList<Book> books = new ArrayList<>();
+    private ArrayList<Book> books = new ArrayList<>();          // Todos los libros
+    private ArrayList<Book> displayedBooks = new ArrayList<>(); // Libros mostrados en la lista
 
-    private boolean ascendingOrder; //Falso por default
+    private boolean ascendingOrder; // Falso por defecto (Se deben mostrar de forma descendente por defecto)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +62,12 @@ public class LibraryActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new BookAdapter(this, books);
+        adapter = new BookAdapter(this, displayedBooks);
         adapter.setClickListener(new BookAdapter.OnBookClickListener() {
             @Override
             public void onBookClick(View itemView, int position) {
                 Intent intent = new Intent(LibraryActivity.this, BookDetailActivity.class);
-                intent.putExtra(BookDetailActivity.EXTRA_BOOK, books.get(position));
+                intent.putExtra(BookDetailActivity.EXTRA_BOOK, displayedBooks.get(position));
                 startActivity(intent);
             }
         });
@@ -86,7 +87,8 @@ public class LibraryActivity extends AppCompatActivity {
                     return;
                 }
 
-                loadBooksIntoRecyclerView(obtainedBooks);
+                books.addAll(obtainedBooks);
+                loadAllBooks();
 
             }
 
@@ -98,25 +100,37 @@ public class LibraryActivity extends AppCompatActivity {
 
     }
 
-    private void loadBooksIntoRecyclerView(ArrayList<Book> obtainedBooks) {
-        books.addAll(obtainedBooks);
+    private void loadAllBooks() {
+        displayedBooks.clear();
+        displayedBooks.addAll(books);
         orderBooksByPopularity(ascendingOrder);
         adapter.notifyDataSetChanged();
-    }
-
-    private void orderBooksByPopularity(final boolean ascendingOrder) {
-        Collections.sort(books, new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return ascendingOrder ? Integer.compare(o2.getPopularity(), o1.getPopularity()) : Integer.compare(o1.getPopularity(), o2.getPopularity());
-            }
-        });
     }
 
     private void reverseBookOrder() {
         ascendingOrder = !ascendingOrder;
         orderBooksByPopularity(ascendingOrder);
         adapter.notifyDataSetChanged();
+    }
+
+    private void filterBooksByAvailability(boolean available) {
+        displayedBooks.clear();
+
+        for (Book book : books)
+            if (book.isAvailable() == available)
+                displayedBooks.add(book);
+
+        orderBooksByPopularity(ascendingOrder);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void orderBooksByPopularity(final boolean ascendingOrder) {
+        Collections.sort(displayedBooks, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return ascendingOrder ? Integer.compare(o1.getPopularity(), o2.getPopularity()) : Integer.compare(o2.getPopularity(), o1.getPopularity());
+            }
+        });
     }
 
     @Override
@@ -134,6 +148,14 @@ public class LibraryActivity extends AppCompatActivity {
             case R.id.action_reverseorder:
                 reverseBookOrder();
                 break;
+            case R.id.action_show_available:
+                filterBooksByAvailability(true);
+                break;
+            case R.id.action_show_nonavailable:
+                filterBooksByAvailability(false);
+                break;
+            case R.id.action_show_all:
+                loadAllBooks();
             default:
                 return super.onOptionsItemSelected(item);
         }
